@@ -39,8 +39,7 @@ jobs:
               rsync -av --delete --exclude='.git' ./ /var/www/html/
             else
               find /var/www/html -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-              cp -a index.html sobre-mi.html /var/www/html/
-              [ -d assets ] && cp -a assets /var/www/html/
+              find . -maxdepth 1 ! -name '.' ! -name '.git' -exec cp -a {} /var/www/html/ \;
             fi
 
             echo "Deploy completed successfully."
