@@ -6,24 +6,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Felipe Aldana</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #f5f5f5;
             color: #333;
-            max-width: 600px;
-            margin: 80px auto;
+        }
+
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+
+        header .inner {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            color: #2c7be5;
+            font-weight: 600;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        header nav a:hover {
+            color: #2c7be5;
+        }
+
+        main {
+            max-width: 700px;
+            margin: 50px auto;
             padding: 0 20px;
         }
 
-        h1 {
-            color: #2c7be5;
+        .intro {
+            margin-bottom: 50px;
+        }
+
+        .intro h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .intro p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .posts h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .post-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .post-card .date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .post-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #222;
+        }
+
+        .post-card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: #aaa;
         }
     </style>
 </head>
 
 <body>
-    <h1>Hola mundo!</h1>
-    <p>Este sitio ya esta en la nube con HTTPS! Deploy desde GitHub utilizando Visual Studio Code!.</p>
+
+    <header>
+        <div class="inner">
+            <h1>Daniel Felipe Aldana</h1>
+            <nav>
+                <a href="#">Inicio</a>
+                <a href="#">Sobre mí</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Hola, soy Daniel.</h2>
+            <p>Bienvenido a mi blog personal. Aquí escribo sobre tecnología, desarrollo de software y lo que voy aprendiendo en el camino.</p>
+        </section>
+
+        <section class="posts">
+            <h3>Entradas recientes</h3>
+
+            <article class="post-card">
+                <div class="date">4 de abril, 2026</div>
+                <h4>Deploy automático con GitHub Actions</h4>
+                <p>Configuré un pipeline de CI/CD para que cada push a main despliegue automáticamente mi sitio en una VM de Google Cloud.</p>
+            </article>
+
+            <article class="post-card">
+                <div class="date">3 de abril, 2026</div>
+                <h4>Empezando con Vibe Coding</h4>
+                <p>Explorando una forma diferente de construir software: dejar que la IA guíe parte del proceso mientras mantengo el control del resultado.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 Daniel Felipe Aldana
+    </footer>
+
 </body>
 
 </html>
