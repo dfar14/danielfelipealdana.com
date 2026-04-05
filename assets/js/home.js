@@ -1,11 +1,13 @@
 (function () {
-    function renderPosts(posts) {
+    var posts = [];
+
+    function renderPosts(filteredPosts) {
         var list = document.querySelector("[data-post-list]");
         if (!list) {
             return;
         }
 
-        list.innerHTML = posts.map(function (post, index) {
+        list.innerHTML = filteredPosts.map(function (post, index) {
             var tags = post.labels.map(function (label) {
                 return '<span class="tag">' + label + "</span>";
             }).join("");
@@ -24,7 +26,6 @@
     }
 
     function filterPosts(filter) {
-        var posts = Array.isArray(window.POSTS) ? window.POSTS : [];
         if (filter === "todos") {
             return posts;
         }
@@ -73,5 +74,14 @@
         applyFilter("todos");
     }
 
-    document.addEventListener("DOMContentLoaded", initFilters);
+    function loadPosts() {
+        fetch("assets/data/posts.json")
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                posts = data;
+                initFilters();
+            });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadPosts);
 })();

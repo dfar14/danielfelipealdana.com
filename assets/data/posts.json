@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Deploy automático con GitHub Actions",
+        "date": "4 de abril, 2026",
+        "tags": ["devops", "cloud"],
+        "labels": ["DevOps", "Cloud"],
+        "excerpt": "Configuré un pipeline de CI/CD para que cada push a main despliegue automáticamente mi sitio en una VM de Google Cloud."
+    },
+    {
+        "title": "Empezando con Vibe Coding",
+        "date": "3 de abril, 2026",
+        "tags": ["reflexiones"],
+        "labels": ["Reflexiones"],
+        "excerpt": "Explorando una forma diferente de construir software: dejar que la IA guíe parte del proceso mientras mantengo el control del resultado."
+    },
+    {
+        "title": "Mi sitio en la nube con HTTPS",
+        "date": "2 de abril, 2026",
+        "tags": ["cloud"],
+        "labels": ["Cloud"],
+        "excerpt": "El primer paso: subir un sitio estático a una VM, configurar un dominio propio y habilitar HTTPS para servir contenido seguro."
+    }
+]
