@@ -1,0 +1,223 @@
+:root {
+    --font-sans: "Segoe UI", sans-serif;
+    --color-bg: #f5f5f5;
+    --color-surface: #ffffff;
+    --color-surface-muted: #e8f0fe;
+    --color-text: #333333;
+    --color-text-soft: #666666;
+    --color-text-faint: #999999;
+    --color-border: #e0e0e0;
+    --color-border-dark: #2a2a4a;
+    --color-primary: #2c7be5;
+    --color-primary-soft: #5b9bf5;
+    --color-dark-bg: #1a1a2e;
+    --color-dark-surface: #16213e;
+    --color-dark-text: #e0e0e0;
+    --color-dark-text-soft: #bbbbbb;
+    --color-dark-text-faint: #888888;
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius-md: 8px;
+    --space-page: 20px;
+    --space-section: 50px;
+    --content-width: 700px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text);
+}
+
+a {
+    color: inherit;
+}
+
+.site-header {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+body.dark .site-header {
+    background-color: var(--color-dark-surface);
+    border-bottom-color: var(--color-border-dark);
+}
+
+.inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 var(--space-page);
+}
+
+.site-header .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.site-branding {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+body.dark .site-branding {
+    color: var(--color-primary-soft);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #555555;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+    color: var(--color-primary);
+}
+
+.site-nav a.active {
+    font-weight: 600;
+}
+
+body.dark .site-nav a {
+    color: #aaaaaa;
+}
+
+body.dark .site-nav a:hover,
+body.dark .site-nav a.active {
+    color: var(--color-primary-soft);
+}
+
+.theme-toggle {
+    background: #eeeeee;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 12px;
+}
+
+.theme-toggle:hover {
+    background: #dddddd;
+}
+
+body.dark .theme-toggle {
+    background: var(--color-border-dark);
+    color: var(--color-dark-text);
+}
+
+.page-content {
+    max-width: var(--content-width);
+    margin: var(--space-section) auto;
+    padding: 0 var(--space-page);
+}
+
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
+}
+
+body.dark .card {
+    background: var(--color-dark-surface);
+    border-color: var(--color-border-dark);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.8rem;
+    color: #aaaaaa;
+}
+
+body.dark .site-footer {
+    color: #666666;
+}
+
+.social-links {
+    margin-bottom: 12px;
+}
+
+.social-links a {
+    color: var(--color-text-faint);
+    text-decoration: none;
+    margin: 0 8px;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--color-primary);
+}
+
+body.dark .social-links a {
+    color: var(--color-primary-soft);
+}
+
+.fade-up {
+    animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .site-header .inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .site-nav a {
+        margin-left: 0;
+        margin-right: 16px;
+    }
+}

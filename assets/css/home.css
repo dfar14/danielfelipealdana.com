@@ -1,0 +1,139 @@
+.intro {
+    margin-bottom: 50px;
+}
+
+.intro h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.intro p {
+    color: var(--color-text-soft);
+    line-height: 1.7;
+}
+
+body.dark .intro p {
+    color: var(--color-dark-text-soft);
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.filters h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-faint);
+    margin-right: 4px;
+}
+
+body.dark .filters h3 {
+    color: var(--color-dark-text-faint);
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid #dddddd;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: var(--color-text-soft);
+    transition: all 0.2s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+}
+
+body.dark .filter-btn {
+    border-color: var(--color-border-dark);
+    color: #aaaaaa;
+}
+
+body.dark .filter-btn:hover,
+body.dark .filter-btn.active {
+    background: var(--color-primary-soft);
+    color: var(--color-dark-bg);
+    border-color: var(--color-primary-soft);
+}
+
+.post-list {
+    display: grid;
+    gap: 16px;
+}
+
+.post-card {
+    padding: 24px;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: var(--color-text-faint);
+}
+
+.tag {
+    font-size: 0.7rem;
+    background-color: var(--color-surface-muted);
+    color: var(--color-primary);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+body.dark .tag {
+    background-color: var(--color-border-dark);
+    color: #8ab4f8;
+}
+
+.post-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #222222;
+}
+
+body.dark .post-card h4 {
+    color: var(--color-dark-text);
+}
+
+.post-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-soft);
+    line-height: 1.6;
+}
+
+body.dark .post-card p {
+    color: var(--color-dark-text-soft);
+}
+
+.no-results {
+    text-align: center;
+    color: var(--color-text-faint);
+    padding: 40px 0;
+    display: none;
+}
+
+body.dark .no-results {
+    color: var(--color-dark-text-faint);
+}
