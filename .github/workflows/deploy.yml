@@ -4,19 +4,97 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
+
+env:
+  ARCHIVE_NAME: danielfelipealdana-site-${{ github.sha }}.tar.gz
+  REMOTE_STAGING_DIR: /tmp/danielfelipealdana-site-${{ github.sha }}
+  REMOTE_TARGET_DIR: /var/www/html
 
 jobs:
-  deploy:
+  package:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Create deployment bundle
+        run: |
+          mkdir -p dist
+          cp index.html sobre-mi.html dist/
+          cp -R assets dist/assets
+          tar -czf "$ARCHIVE_NAME" -C dist .
+
+      - name: Upload deployment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-bundle
+          path: ${{ env.ARCHIVE_NAME }}
+          if-no-files-found: error
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: package
+    environment: production
+    steps:
+      - name: Download deployment artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-bundle
+
+      - name: Upload artifact to VM
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: ${{ env.ARCHIVE_NAME }}
+          target: /tmp
+
+      - name: Publish site on VM
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
           script: |
-            cd ~/danielfelipealdana.com
-            git pull origin main
-            cp -r * /var/www/html/
-            echo "Automatic Deploy Completed!"
+            set -eu
+            REMOTE_ARCHIVE_PATH="/tmp/${{ env.ARCHIVE_NAME }}"
+            REMOTE_STAGING_DIR="${{ env.REMOTE_STAGING_DIR }}"
+            REMOTE_TARGET_DIR="${{ env.REMOTE_TARGET_DIR }}"
+
+            if [ "$REMOTE_TARGET_DIR" != "/var/www/html" ]; then
+              echo "Unexpected deploy target: $REMOTE_TARGET_DIR"
+              exit 1
+            fi
+
+            rm -rf "$REMOTE_STAGING_DIR"
+            mkdir -p "$REMOTE_STAGING_DIR"
+            tar -xzf "$REMOTE_ARCHIVE_PATH" -C "$REMOTE_STAGING_DIR"
+
+            if [ ! -f "$REMOTE_STAGING_DIR/index.html" ]; then
+              echo "Deployment bundle is missing index.html"
+              exit 1
+            fi
+
+            sudo mkdir -p "$REMOTE_TARGET_DIR"
+
+            if command -v rsync >/dev/null 2>&1; then
+              sudo rsync -av --delete "$REMOTE_STAGING_DIR"/ "$REMOTE_TARGET_DIR"/
+            else
+              sudo find "$REMOTE_TARGET_DIR" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+              sudo cp -a "$REMOTE_STAGING_DIR"/. "$REMOTE_TARGET_DIR"/
+            fi
+
+            rm -rf "$REMOTE_STAGING_DIR"
+            rm -f "$REMOTE_ARCHIVE_PATH"
+
+            echo "Automatic deploy completed."
