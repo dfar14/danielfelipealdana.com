@@ -36,7 +36,8 @@
             "        </nav>",
             '        <button class="theme-toggle" type="button" data-theme-toggle title="Cambiar tema" aria-label="Cambiar tema" aria-pressed="false">&#9790;</button>',
             "    </div>",
-            "</div>"
+            "</div>",
+            '<div class="header-accent"></div>'
         ].join("\n        ");
     }
 
