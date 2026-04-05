@@ -64,7 +64,6 @@ jobs:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script_stop: true
           script: |
             set -eu
             REMOTE_ARCHIVE_PATH="/tmp/${{ env.ARCHIVE_NAME }}"
@@ -85,13 +84,16 @@ jobs:
               exit 1
             fi
 
-            sudo mkdir -p "$REMOTE_TARGET_DIR"
+            if [ ! -d "$REMOTE_TARGET_DIR" ]; then
+              echo "Deploy target does not exist: $REMOTE_TARGET_DIR"
+              exit 1
+            fi
 
             if command -v rsync >/dev/null 2>&1; then
-              sudo rsync -av --delete "$REMOTE_STAGING_DIR"/ "$REMOTE_TARGET_DIR"/
+              rsync -av --delete "$REMOTE_STAGING_DIR"/ "$REMOTE_TARGET_DIR"/
             else
-              sudo find "$REMOTE_TARGET_DIR" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-              sudo cp -a "$REMOTE_STAGING_DIR"/. "$REMOTE_TARGET_DIR"/
+              find "$REMOTE_TARGET_DIR" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+              cp -a "$REMOTE_STAGING_DIR"/. "$REMOTE_TARGET_DIR"/
             fi
 
             rm -rf "$REMOTE_STAGING_DIR"
