@@ -18,5 +18,5 @@ jobs:
           script: |
             cd ~/danielfelipealdana.com
             git pull origin main
-            sudo cp -r * /var/www/html/
+            cp -r * /var/www/html/
             echo "Automatic Deploy Completed!"
