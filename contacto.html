@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Daniel Felipe Aldana</title>
+    <meta name="description" content="Formulario de contacto de Daniel Felipe Aldana.">
+    <meta property="og:title" content="Contacto - Daniel Felipe Aldana">
+    <meta property="og:description" content="Formulario de contacto de Daniel Felipe Aldana.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://danielfelipealdana.com/contacto.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Contacto - Daniel Felipe Aldana">
+    <meta name="twitter:description" content="Formulario de contacto de Daniel Felipe Aldana.">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+</head>
+
+<body>
+    <header class="site-header" data-site-header></header>
+
+    <main class="page-content">
+        <h2 class="page-title fade-up">Contacto</h2>
+        <p class="page-subtitle fade-up" style="animation-delay: 0.05s">Deja tus datos y me pondré en contacto contigo.</p>
+
+        <form class="contact-form card fade-up" style="animation-delay: 0.1s" id="contact-form" novalidate>
+            <div class="form-group">
+                <label for="nombre">Nombre <span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo" autocomplete="name">
+                <span class="field-error" id="nombre-error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono <span class="required">*</span></label>
+                <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 300 123 4567" autocomplete="tel">
+                <span class="field-error" id="telefono-error"></span>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <span class="btn-text">Enviar</span>
+                <span class="btn-loading" hidden>Enviando...</span>
+            </button>
+
+            <div class="form-message" id="form-message" hidden></div>
+        </form>
+    </main>
+
+    <footer class="site-footer" data-site-footer></footer>
+
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/contact.js"></script>
+</body>
+
+</html>

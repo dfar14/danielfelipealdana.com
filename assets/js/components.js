@@ -1,7 +1,8 @@
 (function () {
     var NAV_LINKS = [
         { href: "index.html", label: "Inicio" },
-        { href: "sobre-mi.html", label: "Sobre mí" }
+        { href: "sobre-mi.html", label: "Sobre mí" },
+        { href: "contacto.html", label: "Contacto" }
     ];
 
     var SOCIAL_LINKS = [

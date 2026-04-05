@@ -36,10 +36,19 @@ jobs:
             fi
 
             if command -v rsync >/dev/null 2>&1; then
-              rsync -av --delete --exclude='.git' ./ /var/www/html/
+              rsync -av --delete --exclude='.git' --exclude='node_modules' ./ /var/www/html/
             else
               find /var/www/html -mindepth 1 -maxdepth 1 -exec rm -rf {} +
-              find . -maxdepth 1 ! -name '.' ! -name '.git' -exec cp -a {} /var/www/html/ \;
+              find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'node_modules' -exec cp -a {} /var/www/html/ \;
+            fi
+
+            cd /var/www/html/server
+            npm install --production
+
+            if command -v pm2 >/dev/null 2>&1; then
+              pm2 restart danielfelipealdana-api || pm2 start index.js --name danielfelipealdana-api
+            else
+              echo "PM2 no encontrado. Instálalo con: npm install -g pm2"
             fi
 
             echo "Deploy completed successfully."
