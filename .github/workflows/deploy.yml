@@ -42,13 +42,17 @@ jobs:
               find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'node_modules' -exec cp -a {} /var/www/html/ \;
             fi
 
-            cd /var/www/html/server
-            npm install --production
+            if command -v npm >/dev/null 2>&1; then
+              cd /var/www/html/server
+              npm install --production
 
-            if command -v pm2 >/dev/null 2>&1; then
-              pm2 restart danielfelipealdana-api || pm2 start index.js --name danielfelipealdana-api
+              if command -v pm2 >/dev/null 2>&1; then
+                pm2 restart danielfelipealdana-api || pm2 start index.js --name danielfelipealdana-api
+              else
+                echo "AVISO: PM2 no encontrado. Instálalo con: npm install -g pm2"
+              fi
             else
-              echo "PM2 no encontrado. Instálalo con: npm install -g pm2"
+              echo "AVISO: Node.js no instalado. El backend no se inició."
             fi
 
             echo "Deploy completed successfully."
